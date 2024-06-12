@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-     
+        animator = GetComponent<Animator>();
     }
    
    private void PlayerJump()
@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
        if (Input.GetKeyDown(KeyCode.Space) && Mathf.Abs(rb.velocity.y) < 0.001f)
         {
             rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
-            
+            PlayJumpAnim();
         }
    }
 
@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(new Vector3(horizontalInput * speed * Time.deltaTime, 0f, 0f));
+        if (horizontalInput!= 0) PlayWalkAnim();
         ScaleFlip(horizontalInput);
     }
 
@@ -42,6 +43,23 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
         }
     }
+
+
+    #region AnimationHandler
+
+        private Animator animator;
+
+        private void PlayWalkAnim()
+        {
+            animator.SetTrigger("goWalk");
+        }
+
+        private void PlayJumpAnim()
+        {
+            animator.SetTrigger("goJump");
+        }
+        
+    #endregion
 
     void Update()
     {
