@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerPositionHandler : MonoBehaviour
 {
     Vector2 playerCurrentPosition;
-    Vector2 playerStartPosition;
+
     Vector2 currentCheckpointPosition;
    
     void Start()
     {
-        playerStartPosition = new Vector2(-14,0);
+      //GameManager.instance.CheckSaveFile();
     }
 
     #region Condition
@@ -27,7 +27,8 @@ public class PlayerPositionHandler : MonoBehaviour
 
         public void OnFinish()
         {
-            
+            GameManager.instance.ChangeLevel(1);
+            GameManager.instance.ChangeScene(0);
         }
     #endregion
 
@@ -48,7 +49,6 @@ public class PlayerPositionHandler : MonoBehaviour
 
 
     #region Instruction
-
         private void ChangePlayerPosition(Vector2 newPosition)
         {
             transform.position = newPosition;

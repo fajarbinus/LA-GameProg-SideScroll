@@ -9,6 +9,8 @@ public class CameraFollow : MonoBehaviour
 
     public Vector3 offset; // Jarak antara kamera dan objek yang diikuti
     
+
+
     private void FixedUpdate() 
     {
         // Mengambil posisi kamera saat ini
